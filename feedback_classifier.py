@@ -193,26 +193,36 @@ if uploaded_file is not None:
         st.write(f"Arquivo carregado com sucesso. Total de {len(sentences)} frases.")
 
         if st.button("Classificar Frases"):
-    results = classify_feedback(sentences)  # Processar todas as frases de uma vez
-    
-    df_results = pd.DataFrame({cat: [''] * len(sentences) for cat in categories.keys()})
-    df_results.insert(0, 'Justificativa da nota', sentences)
-    df_results['Sobrecarga'] = [result['Sobrecarga'] for result in results]
-    
-    for i, result in enumerate(results):
-        for category, sentiment in result['classificacao_detalhada'].items():
-            if category in df_results.columns:
-                df_results.at[i, category] = sentiment
-    
-    st.write(df_results)
-    
-    csv = df_results.to_csv(index=False, encoding='utf-8-sig')
-    st.download_button(
-        label="Download dos resultados em CSV",
-        data=csv,
-        file_name="resultados_classificacao.csv",
-        mime="text/csv",
-    )
+            progress_bar = st.progress(0)
+            results = []
+
+            for i, sentence in enumerate(sentences):
+                result = classify_feedback(sentence)
+                results.append(result)
+                progress_bar.progress((i + 1) / len(sentences))
+
+            # Criar DataFrame com todas as categorias
+            df_results = pd.DataFrame({cat: [''] * len(sentences) for cat in categories.keys()})
+            df_results.insert(0, 'Justificativa da nota', sentences)
+            df_results['Sobrecarga'] = ''
+
+            # Preencher o DataFrame com os resultados
+            for i, result in enumerate(results):
+                for category, sentiment in result['classificacao_detalhada'].items():
+                    if category in df_results.columns:
+                        df_results.at[i, category] = sentiment
+                df_results.at[i, 'Sobrecarga'] = result.get('Sobrecarga', '')
+
+            st.write(df_results)
+
+            csv = df_results.to_csv(index=False, encoding='utf-8-sig')
+
+            st.download_button(
+                label="Download dos resultados em CSV",
+                data=csv,
+                file_name="resultados_classificacao.csv",
+                mime="text/csv",
+            )
     else:
         st.error("O arquivo CSV deve conter uma coluna chamada 'Justificativa da nota'.")
 else:
