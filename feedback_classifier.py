@@ -204,7 +204,7 @@ if uploaded_file is not None:
             # Criar DataFrame com todas as categorias
             df_results = pd.DataFrame({cat: [''] * len(sentences) for cat in categories.keys()})
             df_results.insert(0, 'Justificativa da nota', sentences)
-            df_results['Sobrecarga'] = ''
+            df_results['Sobrecarga'] = 'FALSE'
 
             # Preencher o DataFrame com os resultados
             for i, result in enumerate(results):
