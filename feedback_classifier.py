@@ -188,8 +188,7 @@ uploaded_file = st.file_uploader("Escolha um arquivo CSV", type="csv")
 
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file, encoding='utf-8-sig')
-    if 'Justificativa da nota' in data.columns or 
-    'Pensando na sua experiência na Aurum, o que estamos fazendo bem e no que podemos melhorar?' in data.columns:
+    if 'Justificativa da nota' in data.columns or 'Pensando na sua experiência na Aurum, o que estamos fazendo bem e no que podemos melhorar?' in data.columns:
         sentences = data['Justificativa da nota'].tolist()
         st.write(f"Arquivo carregado com sucesso. Total de {len(sentences)} frases.")
 
