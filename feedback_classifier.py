@@ -140,11 +140,11 @@ categories = {
                     "política de D&I sólida", "sentir que posso ser eu", "trabalho em um ambiente seguro", "posso ser quem sou"],
         "negativo": ["não identifica ações de D&I", "acha insuficiente as ações da empresa", "falta de representatividade", "precisa de vagas afirmativas"]
     },
-    # "Sobrecarga": {
-    #     "positivo": ["equilíbrio na carga de trabalho", "suporte da equipe", "delegação adequada", "gestão eficiente do tempo", "recursos disponíveis"],
-    #     "negativo": ["alta carga de trabalho", "falta de pessoal", "estresse excessivo", "dificuldade em cumprir prazos", "saturação", "falta de suporte", 
-    #                 "burnout", "exaustão", "cansaço mental", "pressão constante", "falta de pausas", "dificuldade de desconectar"]
-    # }
+    "Sobrecarga": {
+        "positivo": ["equilíbrio na carga de trabalho", "suporte da equipe", "delegação adequada", "gestão eficiente do tempo", "recursos disponíveis"],
+        "negativo": ["alta carga de trabalho", "falta de pessoal", "estresse excessivo", "dificuldade em cumprir prazos", "saturação", "falta de suporte", 
+                    "burnout", "exaustão", "cansaço mental", "pressão constante", "falta de pausas", "dificuldade de desconectar"]
+    }
 }
 
 def classify_feedback(sentence):
