@@ -163,8 +163,7 @@ Forneça a resposta no seguinte formato JSON:
         "categoria1": "sentimento",
         "categoria2": "sentimento",
         ...
-    }},
-    'Sobrecarga': 'FALSE'
+    }}
 }}
 
 Inclua apenas as categorias aplicáveis na classificação detalhada.
@@ -204,14 +203,15 @@ if uploaded_file is not None:
             # Criar DataFrame com todas as categorias
             df_results = pd.DataFrame({cat: [''] * len(sentences) for cat in categories.keys()})
             df_results.insert(0, 'Justificativa da nota', sentences)
-            df_results['Sobrecarga'] = 'FALSE'
+            df_results['Sobrecarga'] = ''
 
             # Preencher o DataFrame com os resultados
             for i, result in enumerate(results):
                 for category, sentiment in result['classificacao_detalhada'].items():
                     if category in df_results.columns:
                         df_results.at[i, category] = sentiment
-                df_results.at[i, 'Sobrecarga'] = result.get('sobrecarga', '')
+                sobrecarga = result['classificacao_detalhada'].get('Sobrecarga', '')
+                df_results.at[i, 'Sobrecarga'] = 'TRUE' if sobrecarga == 'Negativo' else 'FALSE'
 
             st.write(df_results)
 
