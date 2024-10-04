@@ -164,7 +164,7 @@ Forneça a resposta no seguinte formato JSON:
         "categoria2": "sentimento",
         ...
     }},
-    'Sobrecarga': "FALSE"
+    'Sobrecarga': 'FALSE
 }}
 
 Inclua apenas as categorias aplicáveis na classificação detalhada.
