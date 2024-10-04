@@ -211,7 +211,7 @@ if uploaded_file is not None:
                 for category, sentiment in result['classificacao_detalhada'].items():
                     if category in df_results.columns:
                         df_results.at[i, category] = sentiment
-                df_results.at[i, 'Sobrecarga'] = result.get('Sobrecarga', '')
+                df_results.at[i, 'Sobrecarga'] = result.get('sobrecarga', '')
 
             st.write(df_results)
 
